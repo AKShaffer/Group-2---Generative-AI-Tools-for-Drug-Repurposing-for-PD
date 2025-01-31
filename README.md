@@ -1,5 +1,5 @@
 # Group-2 - Generative-AI-Tools-for-Drug-Repurposing-for-PD
-This project aims to use generative AI to identify potential repurposable drugs to treat the neurodegenerative disorder of Parkinson's disease (PD). 
+This project aims to use generative AI to identify potentially repurposable drugs to treat the neurodegenerative disorder of Parkinson's disease (PD). 
 
 Objectives:
 - Target Identification: Use bioinformatics tools to identify key genes, proteins, and pathways involved in Parkinson's disease.
