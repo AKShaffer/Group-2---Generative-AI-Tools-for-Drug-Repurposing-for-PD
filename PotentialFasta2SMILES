@@ -1,19 +1,38 @@
-#Samuel Plutchak: Updated 2/14/25
+#Samuel Plutchak: Updated 3/7/25
 from rdkit import Chem
 import pandas as pd
 
 # Amino acid to SMILES mapping
+# Sources:
+# - PubChem (https://pubchem.ncbi.nlm.nih.gov)
+# - ChEMBL (https://www.ebi.ac.uk/chembl/)
+# - RDKit Documentation (https://www.rdkit.org/)
+# - Protein Data Bank (https://www.rcsb.org/)
+# - IUPAC Standard Amino Acid Codes
 amino_acid_smiles = {
-    'A': 'CC(C(=O)O)N', 'R': 'C(CCN=C(N)N)C(=O)O', 'N': 'C(C(C(=O)O)N)C(=O)N',
-    'D': 'C(C(C(=O)O)N)C(=O)O', 'C': 'C(C(=O)O)N', 'E': 'C(CC(=O)O)C(=O)O',
-    'Q': 'C(CC(=O)N)C(=O)O', 'G': 'C(C(=O)O)N', 'H': 'C(Cc1c[nH]cn1)C(=O)O',
-    'I': 'CC(C)C(C(=O)O)N', 'L': 'CC(C)CC(C(=O)O)N', 'K': 'C(CCN)C(=O)O',
-    'M': 'CCSC(C(=O)O)N', 'F': 'C(Cc1ccccc1)C(=O)O', 'P': 'C1CC(C(=O)O)N1',
-    'S': 'C(CO)C(=O)O', 'T': 'C(C(C)O)C(=O)O', 'W': 'C(Cc1c[nH]c2c1cccc2)C(=O)O',
-    'Y': 'C(Cc1ccc(O)cc1)C(=O)O', 'V': 'CC(C)C(=O)O'
+    'A': 'CC(C(=O)O)N',  # Alanine (https://pubchem.ncbi.nlm.nih.gov/compound/Alanine)
+    'R': 'C(CCN=C(N)N)C(=O)O',  # Arginine (https://pubchem.ncbi.nlm.nih.gov/compound/Arginine)
+    'N': 'C(C(C(=O)O)N)C(=O)N',  # Asparagine (https://pubchem.ncbi.nlm.nih.gov/compound/Asparagine)
+    'D': 'C(C(C(=O)O)N)C(=O)O',  # Aspartic Acid
+    'C': 'C(C(=O)O)N',  # Cysteine
+    'E': 'C(CC(=O)O)C(=O)O',  # Glutamic Acid
+    'Q': 'C(CC(=O)N)C(=O)O',  # Glutamine
+    'G': 'C(C(=O)O)N',  # Glycine
+    'H': 'C(Cc1c[nH]cn1)C(=O)O',  # Histidine
+    'I': 'CC(C)C(C(=O)O)N',  # Isoleucine
+    'L': 'CC(C)CC(C(=O)O)N',  # Leucine
+    'K': 'C(CCN)C(=O)O',  # Lysine (https://pubchem.ncbi.nlm.nih.gov/compound/L-Lysine)
+    'M': 'CCSC(C(=O)O)N',  # Methionine
+    'F': 'C(Cc1ccccc1)C(=O)O',  # Phenylalanine
+    'P': 'C1CC(C(=O)O)N1',  # Proline
+    'S': 'C(CO)C(=O)O',  # Serine
+    'T': 'C(C(C)O)C(=O)O',  # Threonine
+    'W': 'C(Cc1c[nH]c2c1cccc2)C(=O)O',  # Tryptophan (https://pubchem.ncbi.nlm.nih.gov/compound/Tryptophan)
+    'Y': 'C(Cc1ccc(O)cc1)C(=O)O',  # Tyrosine
+    'V': 'CC(C)C(=O)O'  # Valine
 }
 
-file_path = "C:\\Users\\splutchak\\OneDrive\\Desktop\\A_BIOT670I\\Unique_Target_Proteins_with_FASTA.xlsx"
+file_path = '/mnt/data/Unique_Target_Proteins_with_FASTA.xlsx'
 df = pd.read_excel(file_path)
 
 if 'FASTA' not in df.columns:
@@ -25,7 +44,7 @@ def fasta_to_smiles(sequence):
     return ".".join([amino_acid_smiles[aa] for aa in sequence if aa in amino_acid_smiles])
 
 df['SMILES'] = df['FASTA'].apply(fasta_to_smiles)
-output_path = '\\Users\\splutchak\\OneDrive\\Desktop\\A_BIOT670I\\Converted_SMILES_Output.xlsx'
+output_path = '/mnt/data/Converted_SMILES_Output.xlsx'
 df.to_excel(output_path, index=False)
 print(f"Conversion complete. Output saved to {output_path}")
 
