@@ -1,0 +1,9 @@
+# Filter the top candidates based on DockScore, agent_likelihood, and augmented_likelihood
+top_candidates = df.sort_values(
+    by=["raw_DockScore", "agent_likelihood", "augmented_likelihood"], 
+    ascending=[True, False, False]  # Prioritize lowest DockScore, then highest likelihoods
+).head(10)  # Selecting top 10 candidates
+
+# Display the results
+import ace_tools as tools
+tools.display_dataframe_to_user(name="Top SMILES Candidates", dataframe=top_candidates)
